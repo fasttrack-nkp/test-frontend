@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import axios, { AxiosResponse } from 'axios';
+import { UserType } from '@/user/types/user';
 
 async function getAllUsers() {
   const config = {
@@ -17,17 +18,18 @@ function useUser() {
     error,
   } = useQuery('getAllUsers', getAllUsers);
 
-  let allUsers = [];
-  let allRoles: any[] = [];
-  let allRoleOptions: any[] = [];
+  let allUsers: UserType[] = [];
+  let allUserOptions: { label: string; value: string }[] = [];
+
   if (dataAllUsers) {
     allUsers = dataAllUsers.data;
-    allRoles = allUsers.map((el: any) => el.role[0]);
-    allRoles = [...allRoles, { id: 'roleId0', name: 'Admin' }];
-    allRoleOptions = allRoles.map((el) => ({ label: el.name, value: el.id }));
+    allUserOptions = allUsers.map((el) => ({
+      label: `${el.firstName} ${el.lastName}`,
+      value: el.id,
+    }));
   }
 
-  return { allUsers, allRoles, allRoleOptions };
+  return { allUsers, allUserOptions };
 }
 
 export default useUser;

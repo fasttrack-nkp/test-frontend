@@ -1,24 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserType } from '@/user/types/user';
+
 export interface WorkingState {
-  role: Role;
+  user: UserType;
 }
-import { Role } from '@/user/types/role';
 
 const initialState = {
-  role: {},
+  user: { id: '', firstName: '', lastName: '' },
 };
 
 export const workingSlice = createSlice({
   name: 'working',
   initialState,
   reducers: {
-    setRole: (state, action: PayloadAction<Role>) => {
-      state.role = action.payload;
+    setUser: (state, action: PayloadAction<UserType>) => {
+      state.user = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {} = workingSlice.actions;
+export const { setUser } = workingSlice.actions;
 
 export default workingSlice.reducer;
