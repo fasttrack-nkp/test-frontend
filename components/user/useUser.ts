@@ -1,14 +1,15 @@
 import { useQuery } from 'react-query';
 import axios, { AxiosResponse } from 'axios';
-import { UserType } from '@/user/types/user';
+import { UserType } from './types/user';
 
 async function getAllUsers() {
+  const url = process.env.NEXT_PUBLIC_BACKEND_URL;
   const config = {
-    url: 'http://localhost:3000/user/all',
+    url: `${url}/user/all`,
     method: 'get',
   };
 
-  return axios.get(config.url);
+  return axios.get<UserType[]>(config.url);
 }
 
 function useUser() {
