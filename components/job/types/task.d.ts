@@ -1,7 +1,7 @@
-import { TrackTypeBasic } from './track';
+import { TrackTypeBasic } from "./track";
 
-type NodeType = 'START_NODE' | 'END_NODE';
-type TaskStatus = 'SUCCESS' | 'PENDING';
+type NodeType = "START_NODE" | "END_NODE" | "INTERMEDIATE_NODE";
+type TaskStatus = "SUCCESS" | "PENDING";
 
 export interface TaskTypeBasic {
   id: string;

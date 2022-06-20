@@ -25,34 +25,53 @@ const Track: FC = () => {
 
   const bgSelect = '#c8cfca';
   const bg = '#F0F8FF';
-  const cardList = allTracks.map((track) => (
-    <Card
-      shadow='sm'
-      p='lg'
-      key={track.id}
-      style={{ backgroundColor: track.id === currentTrack?.id ? bgSelect : bg }}
-      onClick={() => clickHandler(track)}
-    >
-      <Group position='apart'>
-        <Group>
-          <Title order={3}>{track.HN}</Title>
-          <Text weight={300}>{track.id}</Text>
-        </Group>
+  const cardList = allTracks.map((track) => {
+    const bgColor = track.id === currentTrack?.id ? bgSelect : bg;
 
-        <Group position='apart'>
-          <Badge color='gray' variant='light'>
-            {track.countAll} Tracks
-          </Badge>
-          <Badge color='green' variant='light'>
-            {track.countSuccess} Success
-          </Badge>
-          <Badge color='pink' variant='light'>
-            {track.countPending} Pending
-          </Badge>
+    const currentTaskBadges = track.currentTasks.map((currentTask) => (
+      <Badge
+        color="gray"
+        variant="light"
+        key={`${track.id} - ${currentTask.id}`}
+      >
+        {currentTask.name}
+      </Badge>
+    ));
+    return (
+      <Card
+        shadow="sm"
+        p="lg"
+        key={track.id}
+        style={{
+          backgroundColor: bgColor,
+        }}
+        onClick={() => clickHandler(track)}
+      >
+        <Group position="apart">
+          <Group>
+            <Title order={6}>{track.HN}</Title>
+            <Text weight={300}>{track.id}</Text>
+          </Group>
+
+          <Group>
+            <Stack spacing="sm">
+              <Badge color="gray" variant="light">
+                {track.countAll} Tracks
+              </Badge>
+              <Badge color="green" variant="light">
+                {track.countSuccess} Success
+              </Badge>
+              <Badge color="pink" variant="light">
+                {track.countPending} Pending
+              </Badge>
+            </Stack>
+
+            <Stack>{currentTaskBadges}</Stack>
+          </Group>
         </Group>
-      </Group>
-    </Card>
-  ));
+      </Card>
+    );
+  });
   return <div>{cardList}</div>;
 };
 

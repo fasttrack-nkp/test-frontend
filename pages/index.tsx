@@ -2,11 +2,11 @@ import type { NextPage } from 'next';
 import User from '@/user/User';
 import Track from '@/job/Track';
 import Task from '@/job/Task';
-import { Title, Stack } from '@mantine/core';
+import { Title, Stack, Container } from '@mantine/core';
 const Home: NextPage = () => {
   return (
-    <div>
-      <Stack spacing='xl'>
+    <Container>
+      <Stack spacing="xl">
         <User />
         <Stack>
           <Title order={2}>Tracks</Title>
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
           <Task />
         </Stack>
       </Stack>
-    </div>
+    </Container>
   );
 };
 

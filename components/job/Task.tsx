@@ -16,15 +16,11 @@ import {
 const Task: FC = () => {
   const { user, track } = useAppSelector((state) => state.working);
 
-  const { allTasks } = useTask(track.id, user.role[0].id || '');
-
-  console.log({ allTasks });
+  const { allTasks } = useTask(track.id, user.role[0]?.id || '');
 
   const taskList = allTasks.map((task) => {
     const statusColor = task.status == 'PENDING' ? 'pink' : 'green';
     const LogButton = <Button disabled={!task.isActive}>Log Time</Button>;
-
-    console.log({ task });
 
     const taskPrevPending = task.taskPrev.filter(
       (el) => el.status === 'PENDING'
@@ -43,15 +39,24 @@ const Task: FC = () => {
     }
 
     return (
-      <Card shadow='sm' p='lg' key={task.id}>
-        <Group position='apart'>
+      <Card
+        shadow="sm"
+        p="lg"
+        key={task.id}
+        style={{
+          borderStyle: 'solid',
+          borderColor: '#F0F8FF',
+          borderWidth: 'thin',
+        }}
+      >
+        <Group position="apart">
           <Group>
-            <Title order={3}>{task.name}</Title>
+            <Title order={6}>{task.name}</Title>
             <Text weight={300}>{task.id}</Text>
           </Group>
 
-          <Group position='apart'>
-            <Badge color={statusColor} variant='light'>
+          <Group position="apart">
+            <Badge color={statusColor} variant="light">
               {task.status}
             </Badge>
 
